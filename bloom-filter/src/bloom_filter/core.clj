@@ -3,4 +3,4 @@
 
 (defn bloom-create [numbits hash-functions]
       (if (or (nil? numbits) (nil? hash-functions)) nil
-          {:bits (repeat numbits 0) :hash-functions []}))
+          {:bits (repeat numbits 0) :hash-functions hash-functions}))
