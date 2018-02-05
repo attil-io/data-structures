@@ -8,5 +8,6 @@
     (is (= nil (bloom-create 0 nil)))
     (is (= nil (bloom-create nil [])))
     (is (= {:bits [] :hash-functions []} (bloom-create 0 [])))
+    (is (= {:bits [0] :hash-functions []} (bloom-create 1 [])))
 ))
 
