@@ -2,6 +2,6 @@
   (:require [clojure.test :refer :all]
             [bloom-filter.core :refer :all]))
 
-(deftest a-test
-  (testing "FIXME, I fail."
-    (is (= 0 1))))
+(deftest create-test
+  (testing "create bloom filter"
+    (is (= nil (bloom-create nil nil)))))
