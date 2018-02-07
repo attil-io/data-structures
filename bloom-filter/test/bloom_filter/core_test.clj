@@ -38,5 +38,6 @@
     (is (true? (bloom-contains empty-filter 0)))
     (is (false? (bloom-contains simple-filter 0)))
     (is (true? (bloom-contains filter-with-element 3)))
+    (is (true? (bloom-contains filter-with-element 10)))
 )))
  
