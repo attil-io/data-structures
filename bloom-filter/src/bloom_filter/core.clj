@@ -6,7 +6,7 @@
           {:bits (vec (repeat numbits 0)) :hash-functions hash-functions}))
 
 (defn bloom-add [bloom-filter value]
-      (when-not (nil? bloom-filter)
+      (when-not (or (nil? bloom-filter) (nil? value))
       (let [hash-functions (:hash-functions bloom-filter)
             bits           (:bits bloom-filter)
             new-bits (reduce (fn [actual-bits hash-function] (assoc actual-bits (hash-function value) 1)) bits hash-functions)]
