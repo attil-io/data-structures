@@ -23,6 +23,7 @@
   (testing "add to bloom filter"
     (is (= nil (bloom-add nil 3)))
     (is (= empty-filter (bloom-add empty-filter nil)))
+    (is (= empty-filter (bloom-add empty-filter 10)))
     (is (= {:bits [0 0 0 1 0 0 0] :hash-functions [mod7fun]}
            (bloom-add single-fun-filter 3)))
     (is (= {:bits [0 1 0 1 0 0 0] :hash-functions [mod7fun alwaysonefun]}
