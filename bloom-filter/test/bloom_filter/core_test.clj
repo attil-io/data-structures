@@ -31,9 +31,11 @@
 )))
 
 (deftest contains-test
-  (let [simple-filter (bloom-create 7 [mod7-fun])
+  (let [empty-filter (bloom-create 7 [])
+        simple-filter (bloom-create 7 [mod7-fun])
         filter-with-element (bloom-add simple-filter 3)]
   (testing "bloom filter contains"
+    (is (true? (bloom-contains empty-filter 0)))
     (is (false? (bloom-contains simple-filter 0)))
     (is (true? (bloom-contains filter-with-element 3)))
 )))
