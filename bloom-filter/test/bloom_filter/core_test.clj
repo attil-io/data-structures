@@ -30,3 +30,9 @@
            (bloom-add two-fun-filter 3)))
 )))
 
+(deftest contains-test
+  (let [empty-filter (bloom-create 7 [])]
+  (testing "bloom filter contains"
+    (is (false? (bloom-contains empty-filter 0)))
+)))
+ 
