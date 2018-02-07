@@ -18,6 +18,7 @@
   (let [mod7fun (fn [num] (mod num 7))
         empty-filter (bloom-create 7 [mod7fun])]
   (testing "add to bloom filter"
+    (is (= nil (bloom-add nil 3)))
     (is (= {:bits [0 0 0 1 0 0 0] :hash-functions [mod7fun]}
            (bloom-add empty-filter 3)))
 )))
