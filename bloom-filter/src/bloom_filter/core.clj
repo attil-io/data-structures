@@ -17,7 +17,7 @@
       (let [bits (:bits bloom-filter)
             hash-functions (safe-hash-functions (count bits) (:hash-functions bloom-filter))
             new-bits (reduce (fn [actual-bits hash-function] (assoc actual-bits (hash-function value) 1)) bits hash-functions)]
-      (assoc-in bloom-filter [:bits] new-bits))))
+      (assoc bloom-filter :bits new-bits))))
 
 (defn bloom-contains [bloom-filter value] 
       (let [bits (:bits bloom-filter)
