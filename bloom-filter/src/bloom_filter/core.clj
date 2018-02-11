@@ -5,7 +5,7 @@
       (assert (number? numbits) "numbits must be numeric")
       (assert (not (nil? hash-functions)) "hash-functions must not be nil")
       (assert (every? ifn? hash-functions) "hash-functions must be a collection of functions")
-      {:bits (vec (repeat numbits 0)) :hash-functions hash-functions})
+      {:bits (apply vector-of :boolean (repeat numbits false)) :hash-functions hash-functions})
 
 (defn bloom-add [bloom-filter value]
       (when-not (nil? bloom-filter) 
@@ -17,5 +17,5 @@
 (defn bloom-contains [bloom-filter value] 
       (let [hash-functions (:hash-functions bloom-filter)
             bits (:bits bloom-filter)]
-      (reduce (fn [actual-value hash-function] (and actual-value (= 1 (bits (hash-function value))))) true hash-functions)))
+      (reduce (fn [actual-value hash-function] (and actual-value (bits (hash-function value)))) true hash-functions)))
 

@@ -3,6 +3,9 @@
 (:require [clojure.test :refer :all]
           [bloom-filter.core :refer :all]))
 
+(def ^:const F false)
+(def ^:const T true)
+
 (defn mod7-fun [num] (mod num 7))
 (defn always-zero-fun [dontcare] 0)  
 
@@ -15,7 +18,7 @@
     (is (thrown-with-msg? AssertionError #"hash-functions must be a collection of functions" (bloom-create 0 ["a"])))
     (is (thrown-with-msg? AssertionError #"numbits must be numeric" (bloom-create nil [])))
     (is (= {:bits [] :hash-functions []} (bloom-create 0 [])))
-    (is (= {:bits [0] :hash-functions []} (bloom-create 1 [])))
+    (is (= {:bits [F] :hash-functions []} (bloom-create 1 [])))
     (is (= {:bits [] :hash-functions [always-zero-fun]} (bloom-create 0 [always-zero-fun])))
 ))
 
@@ -27,9 +30,9 @@
     (is (= nil (bloom-add nil 3)))
     (is (= empty-filter (bloom-add empty-filter nil)))
     (is (= empty-filter (bloom-add empty-filter 10)))
-    (is (= {:bits [0 0 0 1 0 0 0] :hash-functions [mod7-fun]}
+    (is (= {:bits [F F F T F F F] :hash-functions [mod7-fun]}
            (bloom-add single-fun-filter 3)))
-    (is (= {:bits [1 0 0 1 0 0 0] :hash-functions [mod7-fun always-zero-fun]}
+    (is (= {:bits [T F F T F F F] :hash-functions [mod7-fun always-zero-fun]}
            (bloom-add two-fun-filter 3)))
 )))
 
