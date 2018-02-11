@@ -42,10 +42,10 @@
   (let [filter-with-element (bloom-add single-fun-filter 3)
         filter-too-high-range-with-element (bloom-add too-high-range-fun-filter 3)]
   (testing "bloom filter contains"
-    (is (true? (bloom-contains empty-filter 0)))
-    (is (false? (bloom-contains single-fun-filter 0)))
-    (is (true? (bloom-contains filter-with-element 3)))
-    (is (true? (bloom-contains filter-with-element 10)))
-    (is (true? (bloom-contains filter-too-high-range-with-element 3)))
+    (is (true? (bloom-contains? empty-filter 0)))
+    (is (false? (bloom-contains? single-fun-filter 0)))
+    (is (true? (bloom-contains? filter-with-element 3)))
+    (is (true? (bloom-contains? filter-with-element 10)))
+    (is (true? (bloom-contains? filter-too-high-range-with-element 3)))
 )))
  
