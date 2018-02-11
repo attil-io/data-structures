@@ -30,10 +30,8 @@
     (is (= nil (bloom-add nil 3)))
     (is (= empty-filter (bloom-add empty-filter nil)))
     (is (= empty-filter (bloom-add empty-filter 10)))
-    (is (= {:bits [F F F T F F F] :hash-functions [mod7-fun]}
-           (bloom-add single-fun-filter 3)))
-    (is (= {:bits [T F F T F F F] :hash-functions [mod7-fun always-zero-fun]}
-           (bloom-add two-fun-filter 3)))
+    (is (= [F F F T F F F] (:bits (bloom-add single-fun-filter 3))))
+    (is (= [T F F T F F F] (:bits (bloom-add two-fun-filter 3))))
 )))
 
 (deftest contains-test
