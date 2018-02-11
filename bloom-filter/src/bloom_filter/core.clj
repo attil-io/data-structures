@@ -13,7 +13,7 @@
       (map #(fn [x] (mod (% x) numbits)) hash-functions))))
 
 (defn bloom-add [bloom-filter value]
-      (when-not (nil? bloom-filter) 
+      (when bloom-filter 
       (let [bits (:bits bloom-filter)
             hash-functions (safe-hash-functions (count bits) (:hash-functions bloom-filter))
             new-bits (reduce (fn [actual-bits hash-function] (assoc actual-bits (hash-function value) 1)) bits hash-functions)]
