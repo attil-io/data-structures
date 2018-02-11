@@ -10,6 +10,10 @@
 (defn always-zero-fun [dontcare] 0)  
 (defn always-ten-fun [dontcare] 10)  
 
+(def empty-filter (bloom-create 7 []))
+(def single-fun-filter (bloom-create 7 [mod7-fun]))
+(def too-high-range-fun-filter (bloom-create 7 [always-ten-fun]))
+
 (deftest create-test
   (testing "create bloom filter"
     (is (thrown-with-msg? AssertionError #"numbits must be numeric" (bloom-create nil nil)))
@@ -24,10 +28,7 @@
 ))
 
 (deftest add-test
-  (let [empty-filter (bloom-create 7 [])
-        single-fun-filter (bloom-create 7 [mod7-fun])
-        too-high-range-fun-filter (bloom-create 7 [always-ten-fun])
-        two-fun-filter (bloom-create 7 [mod7-fun always-zero-fun])]
+  (let [two-fun-filter (bloom-create 7 [mod7-fun always-zero-fun])]
   (testing "add to bloom filter"
     (is (= nil (bloom-add nil 3)))
     (is (= empty-filter (bloom-add empty-filter nil)))
@@ -38,12 +39,10 @@
 )))
 
 (deftest contains-test
-  (let [empty-filter (bloom-create 7 [])
-        simple-filter (bloom-create 7 [mod7-fun])
-        filter-with-element (bloom-add simple-filter 3)]
+  (let [filter-with-element (bloom-add single-fun-filter 3)]
   (testing "bloom filter contains"
     (is (true? (bloom-contains empty-filter 0)))
-    (is (false? (bloom-contains simple-filter 0)))
+    (is (false? (bloom-contains single-fun-filter 0)))
     (is (true? (bloom-contains filter-with-element 3)))
     (is (true? (bloom-contains filter-with-element 10)))
 )))
