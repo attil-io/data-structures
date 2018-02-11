@@ -24,5 +24,9 @@
 (defn bloom-contains? [bloom-filter value] 
       (let [bits (:bits bloom-filter)
             hash-functions (safe-hash-functions (count bits) (:hash-functions bloom-filter))]
-      (reduce (fn [actual-value hash-function] (and actual-value (bits (hash-function value)))) true hash-functions)))
+      (reduce (fn [actual-value hash-function] 
+                  (let [new-value (and actual-value (bits (hash-function value)))]
+                  (or new-value (reduced false)))) 
+              true
+              hash-functions)))
 
