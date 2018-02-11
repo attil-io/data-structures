@@ -8,6 +8,7 @@
 
 (defn mod7-fun [num] (mod num 7))
 (defn always-zero-fun [dontcare] 0)  
+(defn always-ten-fun [dontcare] 10)  
 
 (deftest create-test
   (testing "create bloom filter"
@@ -25,6 +26,7 @@
 (deftest add-test
   (let [empty-filter (bloom-create 7 [])
         single-fun-filter (bloom-create 7 [mod7-fun])
+        too-high-range-fun-filter (bloom-create 7 [always-ten-fun])
         two-fun-filter (bloom-create 7 [mod7-fun always-zero-fun])]
   (testing "add to bloom filter"
     (is (= nil (bloom-add nil 3)))
@@ -32,6 +34,7 @@
     (is (= empty-filter (bloom-add empty-filter 10)))
     (is (= [F F F T F F F] (:bits (bloom-add single-fun-filter 3))))
     (is (= [T F F T F F F] (:bits (bloom-add two-fun-filter 3))))
+    (is (= [F F F T F F F] (:bits (bloom-add too-high-range-fun-filter 3))))
 )))
 
 (deftest contains-test
