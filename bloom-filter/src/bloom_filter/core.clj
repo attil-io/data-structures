@@ -4,8 +4,7 @@
 (defn bloom-create [numbits hash-functions]
       (assert (number? numbits) "numbits must be numeric")
       (assert (not (nil? hash-functions)) "hash-functions must not be nil")
-      (when-not (or (nil? numbits) (nil? hash-functions))
-          {:bits (vec (repeat numbits 0)) :hash-functions hash-functions}))
+      {:bits (vec (repeat numbits 0)) :hash-functions hash-functions})
 
 (defn bloom-add [bloom-filter value]
       (when-not (nil? bloom-filter) 
