@@ -2,7 +2,7 @@
 
 
 (defn bloom-create [numbits hash-functions]
-      (if (or (nil? numbits) (nil? hash-functions)) nil
+      (when-not (or (nil? numbits) (nil? hash-functions))
           {:bits (vec (repeat numbits 0)) :hash-functions hash-functions}))
 
 (defn bloom-add [bloom-filter value]
