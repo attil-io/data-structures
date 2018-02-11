@@ -11,6 +11,8 @@
     (is (thrown-with-msg? AssertionError #"numbits must be numeric" (bloom-create nil nil)))
     (is (thrown-with-msg? AssertionError #"numbits must be numeric" (bloom-create "a" nil)))
     (is (thrown-with-msg? AssertionError #"hash-functions must not be nil" (bloom-create 0 nil)))
+    (is (thrown-with-msg? AssertionError #"hash-functions must be a collection of functions" (bloom-create 0 "a")))
+    (is (thrown-with-msg? AssertionError #"hash-functions must be a collection of functions" (bloom-create 0 ["a"])))
     (is (thrown-with-msg? AssertionError #"numbits must be numeric" (bloom-create nil [])))
     (is (= {:bits [] :hash-functions []} (bloom-create 0 [])))
     (is (= {:bits [0] :hash-functions []} (bloom-create 1 [])))
