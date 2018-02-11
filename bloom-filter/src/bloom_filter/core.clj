@@ -2,7 +2,7 @@
 
 
 (defn bloom-create [numbits hash-functions]
-      (assert (not (nil? numbits)) "numbits must not be nil")
+      (assert (number? numbits) "numbits must be numeric")
       (when-not (or (nil? numbits) (nil? hash-functions))
           {:bits (vec (repeat numbits 0)) :hash-functions hash-functions}))
 
