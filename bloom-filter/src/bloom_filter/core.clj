@@ -20,7 +20,8 @@
            (persistent!)
            (assoc bloom-filter :bits)))))
 
-(defn bloom-contains? [{:keys [hash-functions bits]} value] 
+(defn bloom-contains? [{:keys [hash-functions bits] :as bloom-filter} value] 
+      (when bloom-filter
       (let [hash-functions (safe-hash-functions (count bits) hash-functions)]
-      (every? #(bits (% value)) hash-functions)))
+      (every? #(bits (% value)) hash-functions))))
 
