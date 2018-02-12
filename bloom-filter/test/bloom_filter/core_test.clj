@@ -6,13 +6,13 @@
 (def ^:const F false)
 (def ^:const T true)
 
-(defn mod7-fun [num] (mod num 7))
-(defn always-zero-fun [dontcare] 0)  
-(defn always-ten-fun [dontcare] 10)  
+(defn mod7-fun [num] {:post [((hash-post-fn 7) %)]} (mod num 7))
+(defn always-zero-fun [dontcare] {:post [((hash-post-fn 7) %)]} 0)  
+(defn always-ten-fun [dontcare] {:post [((hash-post-fn 7) %)]} 10) 
 
 (def empty-filter (bloom-create 7 []))
-(def single-fun-filter (bloom-create 7 [mod7-fun]))
-(def too-high-range-fun-filter (bloom-create 7 [always-ten-fun]))
+(def single-fun-filter (bloom-create 7 [(var mod7-fun)]))
+(def too-high-range-fun-filter (bloom-create 7 [(var always-ten-fun)]))
 
 (deftest create-test
   (testing "create bloom filter"
