@@ -17,5 +17,5 @@
 (defn get-nth-linked-list [{:keys [value next-node] :as linked-list} n]
       (if (< n 1)
           value
-          (get-nth-linked-list next-node (dec n))))
+          (recur next-node (dec n))))
 
