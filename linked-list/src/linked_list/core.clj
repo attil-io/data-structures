@@ -15,5 +15,5 @@
           (or (= value query-value) (contains-linked-list? next-node query-value))))
 
 (defn get-nth-linked-list [{:keys [value next-node] :as linked-list} n]
-      nil)
+      value)
 

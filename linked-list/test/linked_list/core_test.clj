@@ -14,6 +14,9 @@
     (is (= {:value 10 :next-node {:value 20 :next-node nil}} (add-to-linked-list (add-to-linked-list empty-linked-list 10) 20)))
     (is (= {:value 10 :next-node {:value 20 :next-node {:value 30 :next-node nil}}} (add-to-linked-list (add-to-linked-list (add-to-linked-list empty-linked-list 10) 20) 30)))))
 
+(def one-element-linked-list (add-to-linked-list empty-linked-list 10))
+(def two-element-linked-list (add-to-linked-list one-element-linked-list 20))
+ 
 (deftest contains-linked-list-test
   (let [one-element-linked-list (add-to-linked-list empty-linked-list 10)
         two-element-linked-list (add-to-linked-list one-element-linked-list 20)]
@@ -25,5 +28,6 @@
 
 (deftest get-nth-linked-list-test
   (testing "get the nth element of linked list"
-    (is (nil? (get-nth-linked-list empty-linked-list 0)))))
+    (is (nil? (get-nth-linked-list empty-linked-list 0)))
+    (is (= 10 (get-nth-linked-list one-element-linked-list 0)))))
 
