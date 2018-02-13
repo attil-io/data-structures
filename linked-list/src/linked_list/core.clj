@@ -10,7 +10,7 @@
               (assoc-in linked-list [:next-node] new-tail)))))
 
 (defn linked-list-contains? [{:keys [value next-node] :as linked-list} query-value]
-      (if (= {} linked-list)
+      (if (empty? linked-list)
           false
           (or (= value query-value) (linked-list-contains? next-node query-value))))
 
