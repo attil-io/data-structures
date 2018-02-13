@@ -2,4 +2,9 @@
 
 (defn create-linked-list [] {})
 
-(defn add-to-linked-list [linked-list value] {:value value :next nil})
+(defn add-to-linked-list [{:keys [value next] :as linked-list} new-value] 
+      (let [new-node {:value new-value :next nil}]
+      (if (= {} linked-list)
+          new-node
+          (assoc-in linked-list [:next] new-node))))
+
