@@ -15,8 +15,10 @@
     (is (= {:value 10 :next-node {:value 20 :next-node {:value 30 :next-node nil}}} (add-to-linked-list (add-to-linked-list (add-to-linked-list empty-linked-list 10) 20) 30)))))
 
 (deftest contains-linked-list-test
-  (let [one-element-linked-list (add-to-linked-list empty-linked-list 10)]
+  (let [one-element-linked-list (add-to-linked-list empty-linked-list 10)
+        two-element-linked-list (add-to-linked-list one-element-linked-list 20)]
   (testing "does a linked list contain a value"
     (is (false? (linked-list-contains? empty-linked-list 10)))
-    (is (true?  (linked-list-contains? one-element-linked-list 10))))))
+    (is (true?  (linked-list-contains? one-element-linked-list 10)))
+    (is (true?  (linked-list-contains? two-element-linked-list 20))))))
 

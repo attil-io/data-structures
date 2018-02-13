@@ -12,5 +12,5 @@
 (defn linked-list-contains? [{:keys [value next-node] :as linked-list} query-value]
       (if (= {} linked-list)
           false
-          (= value query-value)))
+          (or (= value query-value) (linked-list-contains? next-node query-value))))
 
