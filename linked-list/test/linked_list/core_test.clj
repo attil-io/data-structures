@@ -23,3 +23,7 @@
     (is (true?  (contains-linked-list? two-element-linked-list 20)))
     (is (false?  (contains-linked-list? two-element-linked-list 30))))))
 
+(deftest get-nth-linked-list-test
+  (testing "get the nth element of linked list"
+    (is (nil? (get-nth-linked-list empty-linked-list 0)))))
+
