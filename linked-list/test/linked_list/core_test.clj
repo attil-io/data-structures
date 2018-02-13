@@ -2,6 +2,6 @@
   (:require [clojure.test :refer :all]
             [linked-list.core :refer :all]))
 
-(deftest a-test
-  (testing "FIXME, I fail."
-    (is (= 0 1))))
+(deftest create-linked-list-test
+  (testing "create linked list"
+    (is (= {} (create-linked-list)))))
