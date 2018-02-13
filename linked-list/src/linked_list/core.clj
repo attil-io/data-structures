@@ -6,8 +6,9 @@
       (let [new-node {:value new-value :next-node nil}]
       (if (= {} linked-list)
           new-node
-          (let [new-tail (if (nil? next-node) new-node (add-to-linked-list next-node new-value))]
-              (assoc-in linked-list [:next-node] new-tail)))))
+          (if (nil? next-node)
+              (assoc-in linked-list [:next-node] new-node)
+              (assoc-in linked-list [:next-node] (recur next-node new-value))))))
 
 (defn contains-linked-list? [{:keys [value next-node] :as linked-list} query-value]
       (if (empty? linked-list)
