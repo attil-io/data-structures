@@ -10,5 +10,6 @@
   (let [empty-linked-list (create-linked-list)]
   (testing "add to linked list"
     (is (= {:value 10 :next-node nil} (add-to-linked-list empty-linked-list 10)))
-    (is (= {:value 10 :next-node {:value 20 :next-node nil}} (add-to-linked-list (add-to-linked-list empty-linked-list 10) 20))))))
+    (is (= {:value 10 :next-node {:value 20 :next-node nil}} (add-to-linked-list (add-to-linked-list empty-linked-list 10) 20)))
+    (is (= {:value 10 :next-node {:value 20 :next-node {:value 30 :next-node nil}}} (add-to-linked-list (add-to-linked-list (add-to-linked-list empty-linked-list 10) 20) 30))))))
 
