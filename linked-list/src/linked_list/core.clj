@@ -12,7 +12,7 @@
 (defn contains-linked-list? [{:keys [value next-node] :as linked-list} query-value]
       (if (empty? linked-list)
           false
-          (or (= value query-value) (contains-linked-list? next-node query-value))))
+          (or (= value query-value) (recur next-node query-value))))
 
 (defn get-nth-linked-list [{:keys [value next-node] :as linked-list} n]
       (if (< n 1)
