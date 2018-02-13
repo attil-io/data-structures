@@ -9,5 +9,8 @@
           (let [new-tail (if (nil? next-node) new-node (add-to-linked-list next-node new-value))]
               (assoc-in linked-list [:next-node] new-tail)))))
 
-(defn linked-list-contains? [linked-list value]
-      false)
+(defn linked-list-contains? [{:keys [value next-node] :as linked-list} query-value]
+      (if (= {} linked-list)
+          false
+          (= value query-value)))
+
