@@ -29,5 +29,6 @@
 (deftest get-nth-linked-list-test
   (testing "get the nth element of linked list"
     (is (nil? (get-nth-linked-list empty-linked-list 0)))
-    (is (= 10 (get-nth-linked-list one-element-linked-list 0)))))
+    (is (= 10 (get-nth-linked-list one-element-linked-list 0)))
+    (is (= 20 (get-nth-linked-list two-element-linked-list 1)))))
 
