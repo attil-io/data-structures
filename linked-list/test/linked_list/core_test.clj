@@ -36,6 +36,7 @@
   (testing "remove the nth element of linked list"
     (is (= empty-linked-list (without-element-linked-list empty-linked-list 0)))
     (is (= empty-linked-list (without-element-linked-list one-element-linked-list 0)))
+    (is (= {:value 20 :next-node nil} (without-element-linked-list two-element-linked-list 0)))
     (is (= one-element-linked-list (without-element-linked-list two-element-linked-list 1)))))
 
  

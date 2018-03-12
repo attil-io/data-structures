@@ -21,8 +21,9 @@
 
 (defn without-element-linked-list [{:keys [value next-node] :as linked-list} n]
       (loop [act-node linked-list counter 0 linked-list-accum (create-linked-list)]
-          (if (nil? (:next-node act-node)) linked-list-accum
+;(println "act-node = " act-node " counter = " counter " linked-list-accum = " linked-list-accum)
           (let [new-linked-list (if (= counter n) linked-list-accum (add-to-linked-list linked-list-accum (:value act-node)))] 
-               (recur (:next-node act-node) (inc counter) new-linked-list)))))
+               (if (nil? (:next-node act-node)) new-linked-list
+                   (recur (:next-node act-node) (inc counter) new-linked-list)))))
 
 
