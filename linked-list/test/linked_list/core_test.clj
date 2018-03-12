@@ -16,15 +16,15 @@
 
 (def one-element-linked-list (add-to-linked-list empty-linked-list 10))
 (def two-element-linked-list (add-to-linked-list one-element-linked-list 20))
- 
+
 (deftest contains-linked-list-test
   (let [one-element-linked-list (add-to-linked-list empty-linked-list 10)
         two-element-linked-list (add-to-linked-list one-element-linked-list 20)]
-  (testing "does a linked list contain a value"
-    (is (false? (contains-linked-list? empty-linked-list 10)))
-    (is (true?  (contains-linked-list? one-element-linked-list 10)))
-    (is (true?  (contains-linked-list? two-element-linked-list 20)))
-    (is (false?  (contains-linked-list? two-element-linked-list 30))))))
+    (testing "does a linked list contain a value"
+      (is (false? (contains-linked-list? empty-linked-list 10)))
+      (is (true?  (contains-linked-list? one-element-linked-list 10)))
+      (is (true?  (contains-linked-list? two-element-linked-list 20)))
+      (is (false?  (contains-linked-list? two-element-linked-list 30))))))
 
 (deftest get-nth-linked-list-test
   (testing "get the nth element of linked list"
