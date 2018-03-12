@@ -32,11 +32,14 @@
     (is (= 10 (get-nth-linked-list one-element-linked-list 0)))
     (is (= 20 (get-nth-linked-list two-element-linked-list 1)))))
 
+(def three-element-linked-list (add-to-linked-list two-element-linked-list 30))
+
 (deftest without-element-linked-list-test
   (testing "remove the nth element of linked list"
     (is (= empty-linked-list (without-element-linked-list empty-linked-list 0)))
     (is (= empty-linked-list (without-element-linked-list one-element-linked-list 0)))
     (is (= {:value 20 :next-node nil} (without-element-linked-list two-element-linked-list 0)))
-    (is (= one-element-linked-list (without-element-linked-list two-element-linked-list 1)))))
+    (is (= one-element-linked-list (without-element-linked-list two-element-linked-list 1)))
+    (is (= {:value 10 :next-node {:value 30 :next-node nil}} (without-element-linked-list three-element-linked-list 1)))))
 
  
