@@ -19,3 +19,6 @@
           value
           (recur next-node (dec n))))
 
+(defn without-element-linked-list [{:keys [value next-node] :as linked-list} n]
+      linked-list)
+
