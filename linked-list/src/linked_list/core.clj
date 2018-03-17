@@ -1,28 +1,29 @@
 (ns linked-list.core)
 
-(defn create-linked-list [] {})
+(defrecord Node [value, next-node])
 
-(defn add-to-linked-list [{:keys [value next-node] :as linked-list} new-value] 
-      (let [new-node {:value new-value :next-node nil}]
-      (if (= {} linked-list)
-          new-node
-          (let [new-tail (if (nil? next-node) new-node (add-to-linked-list next-node new-value))]
-              (assoc-in linked-list [:next-node] new-tail)))))
+(defn- new-node [value]
+      (->Node value nil))
 
-(defn contains-linked-list? [{:keys [value next-node] :as linked-list} query-value]
-      (if (empty? linked-list)
+(defn create-linked-list [] nil)
+
+(defn add-to-linked-list [node new-value] 
+      (if node
+        (update node :next-node #(add-to-linked-list % new-value))
+        (new-node new-value)))
+
+(defn contains-linked-list? [{:keys [value next-node] :as node} query-value]
+      (if (nil? node)
           false
-          (or (= value query-value) (recur next-node query-value))))
+          (or (= value query-value) (recur (:next-node node) query-value))))
 
-(defn get-nth-linked-list [{:keys [value next-node] :as linked-list} n]
+(defn get-nth-linked-list [{:keys [value next-node] :as node} n]
       (if (< n 1)
           value
           (recur next-node (dec n))))
 
-(defn without-element-linked-list [linked-list n]
-      (loop [{:keys [value next-node] :as act-node} linked-list counter 0 linked-list-accum (create-linked-list)]
-          (let [new-linked-list (if (= counter n) linked-list-accum (add-to-linked-list linked-list-accum value))] 
-               (if (nil? next-node) new-linked-list
-                   (recur next-node (inc counter) new-linked-list)))))
-
-
+(defn without-element-linked-list [{:keys [value next-node] :as node} n]
+      (cond
+            (nil? node) nil
+            (zero? n) next-node
+            :else (update node :next-node without-element-linked-list (dec n))))

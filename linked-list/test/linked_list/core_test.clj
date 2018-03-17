@@ -4,15 +4,19 @@
 
 (deftest create-linked-list-test
   (testing "create linked list"
-    (is (= {} (create-linked-list)))))
+    (is (= nil (create-linked-list)))))
+
+(defn new-node 
+  ([value] (new-node value nil))
+  ([value next-node] (->Node value next-node)))
 
 (def empty-linked-list (create-linked-list))
 
 (deftest add-to-linked-list-test
   (testing "add to linked list"
-    (is (= {:value 10 :next-node nil} (add-to-linked-list empty-linked-list 10)))
-    (is (= {:value 10 :next-node {:value 20 :next-node nil}} (add-to-linked-list (add-to-linked-list empty-linked-list 10) 20)))
-    (is (= {:value 10 :next-node {:value 20 :next-node {:value 30 :next-node nil}}} (add-to-linked-list (add-to-linked-list (add-to-linked-list empty-linked-list 10) 20) 30)))))
+    (is (= (new-node 10) (add-to-linked-list empty-linked-list 10)))
+    (is (= (new-node 10 (new-node 20)) (add-to-linked-list (add-to-linked-list empty-linked-list 10) 20)))
+    (is (= (new-node 10 (new-node 20 (new-node 30))) (add-to-linked-list (add-to-linked-list (add-to-linked-list empty-linked-list 10) 20) 30)))))
 
 (def one-element-linked-list (add-to-linked-list empty-linked-list 10))
 (def two-element-linked-list (add-to-linked-list one-element-linked-list 20))
@@ -38,8 +42,8 @@
   (testing "remove the nth element of linked list"
     (is (= empty-linked-list (without-element-linked-list empty-linked-list 0)))
     (is (= empty-linked-list (without-element-linked-list one-element-linked-list 0)))
-    (is (= {:value 20 :next-node nil} (without-element-linked-list two-element-linked-list 0)))
+    (is (= (new-node 20) (without-element-linked-list two-element-linked-list 0)))
     (is (= one-element-linked-list (without-element-linked-list two-element-linked-list 1)))
-    (is (= {:value 10 :next-node {:value 30 :next-node nil}} (without-element-linked-list three-element-linked-list 1)))))
+    (is (= (new-node 10 (new-node 30)) (without-element-linked-list three-element-linked-list 1)))))
 
  
